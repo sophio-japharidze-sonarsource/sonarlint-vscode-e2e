@@ -9,7 +9,7 @@ trigger:
   - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   - group: sonarsource-build-variables
@@ -38,6 +38,9 @@ steps:
     condition: always()
   - publish: ./cypress/screenshots/notifications.cy.js/SonarLint Extension -- Should show java error notification (failed).png
     artifact: Screenshot_3.11_$(System.JobAttempt)
+    condition: always()
+  - publish: ./cypress/screenshots/notifications.cy.js/SonarLint Extension -- Should show SonarLint Explorer Menu Items (failed).png
+    artifact: Screenshot_explorermenu_3.11_$(System.JobAttempt)
     condition: always()
   - script: echo Build finished
     displayName: 'Finalize build'

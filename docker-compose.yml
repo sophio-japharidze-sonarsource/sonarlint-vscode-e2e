@@ -1,6 +1,17 @@
-version: '2'
+version: '3'
 services:
+  e2e:
+    image: codercom/code-server:latest
+    command: "/source --auth none"
+    container_name: SonarLintVSCode
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/source
+    depends_on:
+      - sonarqube
   sonarqube:
+    platform: linux/x86_64
     image: sonarqube:community
     hostname: sonarqube
     container_name: sonarqube
@@ -16,13 +27,21 @@ services:
       - sonarqube_logs:/opt/sonarqube/logs
     ports:
       - "9000:9000"
-  e2e:
-    image: codercom/code-server:latest
-    command: "/source --auth none"
-    container_name: SonarLintVSCode
-    ports:
-      - "8080:8080"
+  db:
+    image: postgres:12
+    hostname: postgresql
+    container_name: postgresql
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
     volumes:
-      - .:/source
-    depends_on:
-      - sonarqube
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  postgresql:
+  postgresql_data:

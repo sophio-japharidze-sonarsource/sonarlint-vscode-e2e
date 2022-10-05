@@ -11,16 +11,15 @@ context('SonarLint Extension', () => {
         cy.contains('Yes, I trust the authors').click()
     })
 
-    it('Should show java error notification', () => {
-        cy.get('.notifications-toasts').should('exist');
-        cy.get('.notifications-toasts')
-            .children()
-            .should('have.length', 2);
-    })
-
     it('Should show SonarLint Explorer Menu Items', () => {
         cy.contains('SonarLint Rules').should('exist');
         cy.contains('SonarLint Issue Locations').should('exist');
         cy.contains('SonarLint Connected Mode').should('exist');
+    })
+
+    it('Should display buttons to connect to SQ and SC',  () => {
+        cy.contains('SonarLint Connected Mode').click();
+        cy.contains('Add SonarQube Connection').should('exist');
+        cy.contains('Add SonarCloud Connection').should('exist');
     })
 })
