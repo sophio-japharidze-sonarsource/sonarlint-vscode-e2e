@@ -1,0 +1,11 @@
+version: '2'
+services:
+  e2e:
+    image: codercom/code-server:latest
+    command: "/source --auth none"
+    container_name: SonarLintVSCode
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/source
+

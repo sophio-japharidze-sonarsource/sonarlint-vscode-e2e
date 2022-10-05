@@ -1,0 +1,21 @@
+{
+  "name": "sonarlint-vscode-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "code-server-up": "docker-compose up -d && docker exec SonarLintVSCode code-server --install-extension /source/dist/SonarSource.sonarlint-vscode-3.11.0@darwin-arm64.vsix",
+    "code-server-down": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e.git"
+  },
+  "author": "KK+SJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e/issues"
+  },
+  "homepage": "https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e#readme"
+}
