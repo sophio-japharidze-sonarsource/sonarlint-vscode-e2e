@@ -9,22 +9,35 @@ trigger:
   - main
 
 pool:
-  vmImage: macOS-latest
+  vmImage: 'windows-latest'
+
+variables:
+  - group: sonarsource-build-variables
 
 steps:
   - script: echo Hello!
     displayName: 'Greet the user'
-  - script: |
-      npm install
-      cd client && npm install
-      cd .. && cd server && npm install
-      cd ..
+  - task: DownloadSecureFile@1
+    displayName: 'Download Maven settings'
+    name: mavenSettings
+    inputs:
+      secureFile: 'maven-settings.xml'
+  - bash: >-
+      mvn org.apache.maven.plugins:maven-dependency-plugin:3.1.1:copy -B --settings $(mavenSettings.secureFilePath) -Denable-repo=qa
+      -Dartifact=org.sonarsource.sonarlint.vscode:sonarlint-vscode:3.11.0:vsix -DoutputDirectory=$(Build.SourcesDirectory)/dist
+    displayName: ' Download staged vsix'
+    env:
+      ARTIFACTORY_QA_READER_USERNAME: $(ARTIFACTORY_QA_READER_USERNAME)
+      ARTIFACTORY_QA_READER_PASSWORD: $(ARTIFACTORY_QA_READER_PASSWORD)
+  - script: npm install
     displayName: 'Install NPM dependencies'
-  - script: npm run compile
-    displayName: 'Compile project'
-  - script: npm test
+  - script: npm run e2e
     displayName: 'Run tests'
-  - script: npx vsce package
-    displayName: 'Create VSIX'
+  - publish: ./cypress/videos/notifications.cy.js.mp4
+    artifact: ITCaptureScreen_3.11_$(System.JobAttempt)
+    condition: always()
+  - publish: ./cypress/screenshots/notifications.cy.js/SonarLint Extension -- Should show java error notification (failed).png
+    artifact: Screenshot_3.11_$(System.JobAttempt)
+    condition: always()
   - script: echo Build finished
     displayName: 'Finalize build'

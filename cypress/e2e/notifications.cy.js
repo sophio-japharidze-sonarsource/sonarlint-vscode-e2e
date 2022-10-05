@@ -11,12 +11,12 @@ context('SonarLint Extension', () => {
         cy.contains('Yes, I trust the authors').click()
     })
 
-    // it('Should show java error notification', () => {
-    //     cy.get('.notifications-toasts').should('exist');
-    //     cy.get('.notifications-toasts')
-    //         .children()
-    //         .should('have.length', 2);
-    // })
+    it('Should show java error notification', () => {
+        cy.get('.notifications-toasts').should('exist');
+        cy.get('.notifications-toasts')
+            .children()
+            .should('have.length', 2);
+    })
 
     it('Should show SonarLint Explorer Menu Items', () => {
         cy.contains('SonarLint Rules').should('exist');
