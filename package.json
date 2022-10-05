@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "code-server-up": "docker-compose up -d && docker exec SonarLintVSCode code-server --install-extension /source/dist/SonarSource.sonarlint-vscode-3.11.0@darwin-arm64.vsix",
-    "code-server-down": "docker-compose down"
+    "test": "cypress",
+    "code-server-up": "docker-compose up -d && docker exec SonarLintVSCode code-server --install-extension /source/dist/sonarlint-vscode-linux-x64-3.12.0-SNAPSHOT.vsix",
+    "code-server-down": "docker-compose down",
+    "e2e": "npm run code-server-up && cypress run && npm run code-server-down",
+    "e2e:debug": "npm run code-server-up && cypress open && npm run code-server-down"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e/issues"
   },
-  "homepage": "https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e#readme"
+  "homepage": "https://github.com/sophio-japharidze-sonarsource/sonarlint-vscode-e2e#readme",
+  "dependencies": {
+    "cypress": "^10.9.0"
+  }
 }
