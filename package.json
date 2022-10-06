@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress",
-    "code-server-up": "docker-compose up -d && docker exec SonarLintVSCode code-server --install-extension /source/dist/sonarlint-vscode-3.11.0.vsix",
+    "code-server-up": "docker-compose up -d && docker exec SonarLintVSCode code-server --install-extension /source/dist/sonarlint-vscode-linux-arm64-3.12.0-SNAPSHOT.vsix",
     "code-server-down": "docker-compose down",
     "e2e": "npm run code-server-up && cypress run && npm run code-server-down",
     "e2e:debug": "npm run code-server-up && cypress open && npm run code-server-down"

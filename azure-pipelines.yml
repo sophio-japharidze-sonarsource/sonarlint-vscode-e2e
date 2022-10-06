@@ -33,13 +33,13 @@ steps:
     displayName: 'Install NPM dependencies'
   - script: npm run e2e
     displayName: 'Run tests'
-  - publish: ./cypress/videos/notifications.cy.js.mp4
+  - publish: ./cypress/videos/welcome.cy.js.mp4
     artifact: ITCaptureScreen_3.11_$(System.JobAttempt)
     condition: always()
-  - publish: ./cypress/screenshots/notifications.cy.js/SonarLint Extension -- Should show java error notification (failed).png
+  - publish: ./cypress/screenshots/welcome.cy.js/SonarLint Extension -- Should show java error notification (failed).png
     artifact: Screenshot_3.11_$(System.JobAttempt)
     condition: always()
-  - publish: ./cypress/screenshots/notifications.cy.js/SonarLint Extension -- Should show SonarLint Explorer Menu Items (failed).png
+  - publish: ./cypress/screenshots/welcome.cy.js/SonarLint Extension -- Should show SonarLint Explorer Menu Items (failed).png
     artifact: Screenshot_explorermenu_3.11_$(System.JobAttempt)
     condition: always()
   - script: echo Build finished
