@@ -12,10 +12,10 @@ context('SonarLint Extension', () => {
     it('Should trust project', () => {
         trustProject()
     })
-    //
-    // it('Should show SonarLint Explorer Menu Items', () => {
-    //     cy.contains('SonarLint Rules').should('exist')
-    //     cy.contains('SonarLint Issue Locations').should('exist')
-    //     cy.contains('SonarLint Connected Mode').should('exist')
-    // })
+
+    it('Should show SonarLint Explorer Menu Items', () => {
+        cy.contains('SonarLint Rules').should('exist')
+        cy.contains('SonarLint Issue Locations').should('exist')
+        cy.contains('SonarLint Connected Mode').should('exist')
+    })
 })

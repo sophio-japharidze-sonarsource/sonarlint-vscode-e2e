@@ -6,7 +6,8 @@ module.exports = defineConfig({
     supportFile: 'cypress/support/commands.js',
     specPattern: [
         "cypress/e2e/welcome.cy.js",
-        "cypress/e2e/sqconnectionsetup.cy.js"
+        "cypress/e2e/sqConnectionSetup.cy.js",
+        "cypress/e2e/autoBinding.cy.js"
     ],
     includeShadowDom: true,
     chromeWebSecurity: false
